@@ -1,0 +1,141 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <form [formGroup]="addproductForm" (ngSubmit)="onSubmit()">        
+                            <div class="form-group">
+                                <label for="Name">Name</label>
+                                <input type="text" formControlName="Name" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
+                                <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Name.errors.required">Name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="short_Description">Short Description</label>
+                                <input type="short_Description" formControlName="short_Description" short_Description class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.short_Description.errors }" />
+                                <div *ngIf="submitted && f.short_Description.errors" class="invalid-feedback">
+                                    <div *ngIf="f.short_Description.errors.required">Short Description is required</div>
+                    
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                    <label for="long_Description">Long Description</label>
+                                    <textarea type="long_Description" formControlName="long_Description" long_Description class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.long_Description.errors }" ></textarea>
+                                    <div *ngIf="submitted && f.long_Description.errors" class="invalid-feedback">
+                                        <div *ngIf="f.long_Description.errors.required">Long Description is required</div>
+                        
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                        <label for="seller_productCode">Seller Product Code </label>
+                                        <input type="seller_productCode" formControlName="seller_productCode" seller_productCode class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.seller_productCode.errors }" />
+                                        <div *ngIf="submitted && f.seller_productCode.errors" class="invalid-feedback">
+                                            <div *ngIf="f.seller_productCode.errors.required">Short Description is required</div>
+                            
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                            <label for="MRP">MRP </label>
+                                            <input type="number" formControlName="MRP" MRP class="form-control"
+                                                [ngClass]="{ 'is-invalid': submitted && f.MRP.errors }" />
+                                            <div *ngIf="submitted && f.MRP.errors" class="invalid-feedback">
+                                                <div *ngIf="f.MRP.errors.required">MRP is required</div>
+                                
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                                <label for="SSP">SSP </label>
+                                                <input type="number" formControlName="SSP" SSP class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.SSP.errors }" />
+                                                <div *ngIf="submitted && f.SSP.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.SSP.errors.required">SSP is required</div>
+                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                    <label for="YMP">YMP  </label>
+                                                    <input type="number" formControlName="YMP" YMP class="form-control"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.YMP.errors }" />
+                                                    <div *ngIf="submitted && f.YMP.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.YMP.errors.required">YMP is required</div>
+                                                    </div>
+                                                </div>
+
+                                               
+                            <div class="form-group">
+                                <label for="warranty">Warranty</label>
+                                <input type="text" formControlName="warranty" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.warranty.errors }" />
+                                <div *ngIf="submitted && f.warranty.errors" class="invalid-feedback">
+                                    <div *ngIf="f.warranty.errors.required">Warranty is required</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                    <label for="dimension">Dimension</label>
+                                    <input type="text" formControlName="dimension" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.dimension.errors }" />
+                                    <div *ngIf="submitted && f.dimension.errors" class="invalid-feedback">
+                                        <div *ngIf="f.dimension.errors.required">Dimension is required</div>
+                                    </div>
+                                </div>
+                            
+                            <div class="form-group">
+                                <label >Images</label>
+                                 <input type='file' accept="image/*" required (change)="readURL($event);" formControlName="image" image class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.image.errors }" />
+        <img id="image1"  style="height: 100px;widows: 100px;" [src]="image1 || 'http://placehold.it/180'" alt="your image" />
+        <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                <div *ngIf="f.image.errors.required">Atleast One Image is required</div>
+            </div>
+
+                            </div>
+
+
+                            
+
+                        <div>
+                                <input type='file' class="form-control" accept="image/*" (change)="readURL1($event);" />
+                                <img id="image2"   style="height: 100px;widows: 100px;" [src]="image2 || 'http://placehold.it/180'" alt="your image" />
+                                <br>
+
+                        </div>
+
+                        <div>
+
+                                <input type='file' class="form-control" accept="image/*" (change)="readURL2($event);" />
+                                <img id="image3"  style="height: 100px;widows: 100px;" [src]="image3 || 'http://placehold.it/180'" alt="your image" />
+                        </div>
+
+                    
+                            <div class="form-group"  style="text-align: center" >
+                                <button [disabled]="loading" class="btn btn-primary">Submit</button>
+                                <img *ngIf="loading" class="pl-3"
+                                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                            </div>
+                        </form>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+<div id="main-component">
+        <button type="button"  class="btn btn-success"  style="float:right;margin:5px;" data-toggle="modal" data-target="#exampleModal" >Add Product</button>
+
+
+</div>

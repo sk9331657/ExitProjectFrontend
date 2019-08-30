@@ -1,0 +1,29 @@
+<div style="margin-left:100px;margin-top:10px;margin-bottom:100px">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div *ngFor="let hero of products" class="card col-lg-3" style="margin:3px">
+                <a routerLink="/viewproduct/{{hero.YmartId}}" >
+                        <img class="card-img-top" style="max-width:100%;height:200px"
+                        src="{{imagefetchurl}}{{hero.Images.split(',')[0]}}" alt="Card image cap">
+                    <div class="card-body">
+                        <div>
+                            <p class="card-title">{{hero.Name}}</p>
+    
+                        </div>
+                        <div> <strong><s>₹{{hero.MRP}}</s></strong> &nbsp;
+                            <span>₹{{hero.YMP}}</span> </div>
+                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                    
+                </a>
+                
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
