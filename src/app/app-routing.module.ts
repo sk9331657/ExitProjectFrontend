@@ -1,3 +1,5 @@
+import { AdmindashboardproductsComponent } from './admindashboardproducts/admindashboardproducts.component';
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { LogincomponentComponent } from './logincomponent/logincomponent.component';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
@@ -14,7 +16,10 @@ const routes: Routes = [
   { path:  'Login',pathMatch: 'full', component:  LogincomponentComponent},
   { path:  'Register',pathMatch: 'full', component:  RegistercomponentComponent},
   { path:  '',pathMatch: 'full', component:  ProductshomeComponent},
-  { path:  'dashboard' ,pathMatch: 'full', component:  SellercomponentComponent},
+  { path:  'sellerdashboard' ,pathMatch: 'full', component:  SellercomponentComponent},
+  { path:  'admindashboard' ,pathMatch: 'full', component:  AdmindashboardComponent},
+  { path:  'admindashboard/manageproducts' ,pathMatch: 'full', component:  AdmindashboardproductsComponent},
+
   { path:'viewproduct/:id',pathMatch:'full',component:SingleproductComponent}
 
 

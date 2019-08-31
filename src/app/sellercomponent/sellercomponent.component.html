@@ -3,7 +3,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" id="closemodal" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -93,6 +93,19 @@
                                         <div *ngIf="f.dimension.errors.required">Dimension is required</div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                        <label for="Categories">Categories</label>
+
+                                        <select  formControlName="Categories" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Categories.errors }"  >
+                                            <option *ngFor="let cat of categories" value=cat[Name] >
+                                                {{cat['Name']}}
+                                            </option>
+                                        </select>
+                                       
+                                        <div *ngIf="submitted && f.Categories.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Categories.errors.required">Categories is required</div>
+                                        </div>
+                                    </div>
                             
                             <div class="form-group">
                                 <label >Images</label>
@@ -136,6 +149,63 @@
 
 <div id="main-component">
         <button type="button"  class="btn btn-success"  style="float:right;margin:5px;" data-toggle="modal" data-target="#exampleModal" >Add Product</button>
+        <table class="table table-bordered table-striped" id="table">
+                <thead>
+                    <tr>
+                        <th scope="col" (click)=sortTable(0)>ID <i class="fa fa-fw fa-sort"></i></th>
 
+                        <th scope="col">Name</th>
+                        <th scope="col" (click)=sortTable(0)>YMP <i class="fa fa-fw fa-sort"></i></th>
+                        <th scope="col" (click)=sortTable(0)>MRP <i class="fa fa-fw fa-sort"></i></th>
+                        <th scope="col" (click)=sortTable(0)>SSP <i class="fa fa-fw fa-sort"></i></th>
+                        <th scope="col" (click)=sortTable(0)>Creation Date <i class="fa fa-fw fa-sort"></i></th>
+
+                        <th scope="col">Status</th>
+                        <th scope="col">Comments</th>
+                        <th scope="col">Options</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let seller of products">
+                        <td>
+                            {{seller['YmartId']}}
+                        </td>
+                        <td>
+                            {{seller['Name']}}
+                        </td>
+                        <td>
+                            {{seller['YMP']}}
+                        </td>
+                        <td>
+                            {{seller['MRP']}}
+
+                        </td>
+                        <td>
+                                {{seller['SSP']}}
+    
+                            </td>
+                        <td>
+                            {{seller['Created'].split('T')[0]}}
+
+                        </td>
+                        <td>
+                            {{seller['Status']}}
+
+                        </td>
+                        <td>
+                                {{seller['Comments']}}
+    
+                            </td>
+                        <td>
+                            <button class="btn btn-success" >
+                                Edit
+                            </button>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
 
 </div>

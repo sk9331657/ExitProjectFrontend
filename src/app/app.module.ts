@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule }    from '@angular/forms';
+import { RecaptchaModule } from 'ng-recaptcha';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +19,8 @@ import { RegistercomponentComponent } from './registercomponent/registercomponen
 import { ProductshomeComponent } from './productshome/productshome.component';
 import { SingleproductComponent } from './singleproduct/singleproduct.component';
 import { AddupdateproductComponent } from './addupdateproduct/addupdateproduct.component';
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { AdmindashboardproductsComponent } from './admindashboardproducts/admindashboardproducts.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +32,15 @@ import { AddupdateproductComponent } from './addupdateproduct/addupdateproduct.c
     RegistercomponentComponent,
     ProductshomeComponent,
     SingleproductComponent,
-    AddupdateproductComponent
+    AddupdateproductComponent,
+    AdmindashboardComponent,
+    AdmindashboardproductsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,HttpClientModule,ReactiveFormsModule
+    BrowserAnimationsModule,HttpClientModule,ReactiveFormsModule,RecaptchaModule,
+
   ],
   providers: [AdminService,SellerService,ProductsService],
   bootstrap: [AppComponent]

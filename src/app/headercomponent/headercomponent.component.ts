@@ -5,8 +5,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./headercomponent.component.css']
 })
 export class HeadercomponentComponent implements OnInit {
+  isAdmin:Boolean;
+  isSeller:Boolean
 
-  constructor() { }
+  constructor() {
+    if(localStorage.getItem('isAdmin')==='true') {
+      this.isAdmin = true;
+    }
+    if(localStorage.getItem('isSeller')==='true') {
+      this.isSeller = true;
+    }
+   }
 
   ngOnInit() {
   }

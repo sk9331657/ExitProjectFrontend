@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-sellercomponent',
@@ -24,6 +25,8 @@ export class SellercomponentComponent implements OnInit {
   image1;
   image3;
   imagearray:Array<File>;
+  categories;
+  products;
 
 
   constructor(
@@ -31,12 +34,21 @@ export class SellercomponentComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private SellerService: SellerService,
-    private ProductsService:ProductsService
+    private ProductsService:ProductsService,
     
   ) {
     if(!localStorage.getItem('userdata')) {
       this.router.navigate['/Login'];
     }
+
+    this.ProductsService.getcategories().then(res=>{
+      this.categories = res['data'];
+    })
+
+    this.ProductsService.getproductsbyid(JSON.parse(localStorage.getItem('userdata'))['ID']).then(res=>{
+      this.products = res['data']
+    })
+    
     // redirect to home if already logged in
     // if (this.authenticationService.currentUserValue) { 
     //     this.router.navigate(['/']);
@@ -54,7 +66,8 @@ export class SellercomponentComponent implements OnInit {
       YMP: ['', Validators.required],
       warranty: ['', Validators.required],
       image: ['', Validators.required],
-      dimension: ['', Validators.required]
+      dimension: ['', Validators.required],
+      Categories: ['',Validators.required]
 
     });
 
@@ -73,11 +86,13 @@ export class SellercomponentComponent implements OnInit {
     }
     this.loading = true;
     var Images=  this.image1.split('=')[1]+','+this.image2.split('=')[1]+','+this.image3.split('=')[1];
-    this.ProductsService.addproduct(JSON.parse(localStorage.getItem("userdata"))['ID'] ,this.f.Name.value,this.f.long_Description.value,this.f.short_Description.value,this.f.seller_productCode.value,this.f.MRP.value,this.f.SSP.value,this.f.YMP.value,this.f.warranty.value,Images,this.f.dimension.value).then(res => {
+    this.ProductsService.addproduct(JSON.parse(localStorage.getItem("userdata"))['ID'] ,this.f.Name.value,this.f.long_Description.value,this.f.short_Description.value,this.f.seller_productCode.value,this.f.MRP.value,this.f.SSP.value,this.f.YMP.value,this.f.warranty.value,Images,this.f.dimension.value,this.f.Categories.value ).then(res => {
       console.log(res)
       if (res['data'] === "Created") {
         this.loading = false;
-      }
+        alert("Product Added");
+        $('#closemodal').click();
+       }
     }).catch(res => {
       console.log(res);
     })

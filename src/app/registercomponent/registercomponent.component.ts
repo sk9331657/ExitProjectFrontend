@@ -72,6 +72,9 @@ export class RegistercomponentComponent implements OnInit {
       console.log(res)
       if(res['data']==="Created") {
         this.loading = false;
+        alert('Created');
+        this.router.navigate(['/Login']); 
+
       }
     }).catch(res => {
       console.log(res);

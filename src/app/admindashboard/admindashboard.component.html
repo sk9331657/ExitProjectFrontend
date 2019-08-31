@@ -1,0 +1,139 @@
+<div>
+
+    <div class="container-fluid" style="margin:10px">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-inline my-2 my-lg-0">
+                    <select class="form-control  my-2 my-lg-0 " id="searchoptions">
+                        <option value="1">
+                            Company Name
+                        </option>
+                        <option value="2">
+                            UserName
+                        </option>
+                        <option value="3">
+                            Mobile
+                        </option>
+                    </select>
+                    &nbsp;
+                    <input required class="form-control mr-sm-2" id="searchquery" type="search" placeholder="Search"
+                        aria-label="Search">
+                    <button (click)=search() class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    &nbsp; <button (click)=reset() class="btn btn-success " type="submit">Reset</button>
+
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6"><select id="filtersellers" class="form-control  my-2 my-lg-0"
+                                (change)="filter()">
+                                <option value="">
+                                    Select Status to Filter
+                                </option>
+                                <option value="APPROVED">
+                                    APPROVED
+                                </option>
+                                <option value="REJECTED">
+                                    REJECTED
+                                </option>
+                                <option value="NEED_APPROVAL">
+                                    NEED_APPROVAL
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-6" (click)="multi()">
+                            <div class="container-fluid">
+                                <div class="row">
+
+                                        <div class="col-6">
+                                                <button class="btn btn-outline-success">
+                                                    Select Multiple Rows
+                                                </button>
+                
+                                            </div>
+                                            <div class="col-6">
+                                                <button style="display: none"  (click)="approve()" id="bulkapprove" class="btn btn-outline-success">
+                                                    Bulk Approve
+                                                </button>
+                                            </div>
+                                </div> </div>
+                           
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="container-fluid" style="overflow:scroll">
+
+    <div class="row">
+
+        <!-- <div class="col-1">
+Filters
+    </div> -->
+        <div class="col-12">
+
+            <table class="table table-bordered table-striped" id="table">
+                <thead>
+                    <tr>
+                        <th scope="col" (click)=sortTable(0)>ID <i class="fa fa-fw fa-sort"></i></th>
+
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Company Name</th>
+                        <th scope="col" (click)=sortTable(0)>Date Created <i class="fa fa-fw fa-sort"></i></th>
+
+                        <th scope="col">Status</th>
+                        <th scope="col">Options</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let seller of sellers">
+                        <td>
+                            {{seller['ID']}}
+                        </td>
+                        <td>
+                            {{seller['userName']}}
+                        </td>
+                        <td>
+                            {{seller['Email']}}
+                        </td>
+                        <td>
+                            {{seller['CompanyName']}}
+
+                        </td>
+                        <td>
+                            {{seller['Created'].split('T')[0]}}
+
+                        </td>
+                        <td>
+                            {{seller['Status']}}
+
+                        </td>
+                        <td>
+                            <select (change)="updatestatus(seller['ID'])" id="{{seller['ID']}}">
+                                <option value="">Select Option</option>
+                                <option value="APPROVED">Approve</option>
+                                <option value="REJECTED">Reject</option>
+                            </select>
+                            &nbsp;
+                            <input class="statusbox" type="checkbox" id="{{seller['ID']}}" style="display: none">
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,6 @@ export class LogincomponentComponent implements OnInit {
   loading = true;
   submitted = false;
   returnUrl: string;
-  adminurl = environment.baseurl +'adminLogin';
 
   constructor(
       private formBuilder: FormBuilder,
@@ -24,17 +23,20 @@ export class LogincomponentComponent implements OnInit {
       private router: Router,
       private SellerService:SellerService,
   ) {
-      console.log(this.adminurl)
       // redirect to home if already logged in
       // if (this.authenticationService.currentUserValue) { 
       //     this.router.navigate(['/']);
       // }
+      if(localStorage.getItem('userdata')&&localStorage.getItem('isSeller')==='true') {
+        this.router.navigate(['/sellerdashboard']); 
+    }
   }
 
   ngOnInit() {
       this.loginForm = this.formBuilder.group({
           email: ['', Validators.required],
-          password: ['', Validators.required]
+          password: ['', Validators.required],
+          role: ['', Validators.required]
       });
 
       // get return url from route parameters or default to '/'
@@ -57,19 +59,23 @@ export class LogincomponentComponent implements OnInit {
      
 
      
-      this.SellerService.login(this.f.email.value, this.f.password.value).then(res=>{
+      this.SellerService.login(this.f.email.value, this.f.password.value,this.f.role.value).then(res=>{
           console.log(res);
           this.loading =   false;
           console.log(res['data']['User'])
           if(res['data']['Status']!="User Found") {
             alert("Invalid Login");
+            this.loading = false;
+
           } 
           else if(res['data']['User']['Status']==="NEW") {
               alert("You account is under review");
           }
           else {
-            localStorage.setItem("userdata",res['data']['User'])
-            this.router.navigate(['/dashboard']); 
+            localStorage.setItem("userdata",res['data']['User']);
+            localStorage.setItem("isSeller",'true')
+
+            this.router.navigate(['/sellerdashboard']); 
           }
       }).catch(res=>{
           console.log(res);
@@ -81,6 +87,9 @@ export class LogincomponentComponent implements OnInit {
 
   }
 
+  resolved(captchaResponse: string) {
+    this.enablelogin();  
+}
  
 
 }
