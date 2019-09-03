@@ -81,11 +81,25 @@ export class ManagecategoriesComponent implements OnInit {
 
     this.ProductsService.addcategory(this.f.Name.value).then((res) => {
       console.log(res);
-      alert(res['Data']);
+      alert(res['data']);
       this.all();
+      this.loading = false;
+      $('#closemodal').click();
+
     })
 
 
+
+}
+
+delete(id) {
+  this.ProductsService.deletecategory(id).then((res) => {
+    console.log(res);
+    alert(res['data']);
+    this.all();
+    
+
+  })
 }
 
 
