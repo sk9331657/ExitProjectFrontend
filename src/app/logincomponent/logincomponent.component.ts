@@ -71,11 +71,11 @@ export class LogincomponentComponent implements OnInit {
                 this.loading = false;
     
               } 
-              else if(res['data']['User']['Status']==="NEED_APPROVAL") {
-                  alert("You account is under review");
+              else if(JSON.parse(res['data']['User'])['Status']==="NEED_APPROVAL") {
+                  alert("You account is under review. Please contact Admin.");
               }
-              else if(res['data']['User']['Status']==="REJECTED") {
-                alert("You account is rejected");
+              else if(JSON.parse(res['data']['User'])['Status']==="REJECTED") {
+                alert("You account is rejected. Please contact Admin.");
              }
               else {
                 localStorage.setItem("userdata",res['data']['User']);
