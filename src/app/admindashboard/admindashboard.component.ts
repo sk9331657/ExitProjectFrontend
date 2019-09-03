@@ -2,6 +2,7 @@ import { SellerService } from './../../services/SellerService';
 import { AdminService } from './../../services/AdminService';
 import { Component, OnInit } from '@angular/core';
 import { element } from 'protractor';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-admindashboard',
   templateUrl: './admindashboard.component.html',
@@ -9,9 +10,13 @@ import { element } from 'protractor';
 })
 export class AdmindashboardComponent implements OnInit {
   sellers;
-  constructor(private AdminService: AdminService, private SellerService: SellerService) { }
+  constructor(private AdminService: AdminService, private SellerService: SellerService,private router:Router) { }
 
   ngOnInit() {
+
+    if(!localStorage.getItem('userdata')) {
+      this.router.navigate(['/Login']);
+    }
 
     this.all();
   }

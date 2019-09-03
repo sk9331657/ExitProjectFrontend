@@ -21,6 +21,8 @@ import { SingleproductComponent } from './singleproduct/singleproduct.component'
 import { AddupdateproductComponent } from './addupdateproduct/addupdateproduct.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { AdmindashboardproductsComponent } from './admindashboardproducts/admindashboardproducts.component';
+import { RouterModule } from '@angular/router';
+import { ManagecategoriesComponent } from './managecategories/managecategories.component';
 
 @NgModule({
   declarations: [
@@ -34,13 +36,13 @@ import { AdmindashboardproductsComponent } from './admindashboardproducts/admind
     SingleproductComponent,
     AddupdateproductComponent,
     AdmindashboardComponent,
-    AdmindashboardproductsComponent
+    AdmindashboardproductsComponent,
+    ManagecategoriesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,HttpClientModule,ReactiveFormsModule,RecaptchaModule,
-
   ],
   providers: [AdminService,SellerService,ProductsService],
   bootstrap: [AppComponent]

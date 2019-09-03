@@ -1,9 +1,9 @@
+import { HeadercomponentComponent } from './../headercomponent/headercomponent.component';
 import { SellerService } from 'src/services/SellerService';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-
 
 @Component({
   selector: 'app-logincomponent',
@@ -22,13 +22,15 @@ export class LogincomponentComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private SellerService:SellerService,
+      private HeadercomponentComponent : HeadercomponentComponent
   ) {
       // redirect to home if already logged in
       // if (this.authenticationService.currentUserValue) { 
       //     this.router.navigate(['/']);
       // }
       if(localStorage.getItem('userdata')&&localStorage.getItem('isSeller')==='true') {
-        this.router.navigate(['/sellerdashboard']); 
+        this.HeadercomponentComponent.setSeller();
+        this.router.navigate(['/sellerdashboard']);  
     }
   }
 
@@ -63,20 +65,41 @@ export class LogincomponentComponent implements OnInit {
           console.log(res);
           this.loading =   false;
           console.log(res['data']['User'])
-          if(res['data']['Status']!="User Found") {
-            alert("Invalid Login");
-            this.loading = false;
+          if(this.f.role.value==="Seller") {
+            if(res['data']['Status']!="User Found") {
+                alert("Invalid Login");
+                this.loading = false;
+    
+              } 
+              else if(res['data']['User']['Status']==="NEED_APPROVAL") {
+                  alert("You account is under review");
+              }
+              else if(res['data']['User']['Status']==="REJECTED") {
+                alert("You account is rejected");
+             }
+              else {
+                localStorage.setItem("userdata",res['data']['User']);
+                localStorage.setItem("isSeller",'true');
+                this.HeadercomponentComponent.setSeller();
+                window.location.href="/sellerdashboard"
+                this.router.navigate(['/sellerdashboard']); 
+              }
+          } else {
 
-          } 
-          else if(res['data']['User']['Status']==="NEW") {
-              alert("You account is under review");
-          }
-          else {
-            localStorage.setItem("userdata",res['data']['User']);
-            localStorage.setItem("isSeller",'true')
+            if(res['data']['Status']!="User Found") {
+                alert("Invalid Admin Login");
+                this.loading = false;
+    
+              } 
+              else {
+                localStorage.setItem("userdata",res['data']['User']);
+                localStorage.setItem("isAdmin",'true');
+                this.HeadercomponentComponent.setAdmin();
+                window.location.href="/admindashboard"
+              }
 
-            this.router.navigate(['/sellerdashboard']); 
           }
+         
       }).catch(res=>{
           console.log(res);
       })

@@ -8,6 +8,7 @@ import { RegistercomponentComponent } from './registercomponent/registercomponen
 import { ProductshomeComponent } from './productshome/productshome.component';
 import { SellercomponentComponent } from './sellercomponent/sellercomponent.component';
 import { SingleproductComponent } from './singleproduct/singleproduct.component';
+import { ManagecategoriesComponent } from './managecategories/managecategories.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path:  'sellerdashboard' ,pathMatch: 'full', component:  SellercomponentComponent},
   { path:  'admindashboard' ,pathMatch: 'full', component:  AdmindashboardComponent},
   { path:  'admindashboard/manageproducts' ,pathMatch: 'full', component:  AdmindashboardproductsComponent},
+  { path:  'admindashboard/managecategories' ,pathMatch: 'full', component:  ManagecategoriesComponent},
 
   { path:'viewproduct/:id',pathMatch:'full',component:SingleproductComponent}
 
@@ -26,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

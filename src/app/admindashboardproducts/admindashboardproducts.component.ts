@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AdminService } from './../../services/AdminService';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/services/ProductsService';
@@ -10,9 +11,13 @@ import { ProductsService } from 'src/services/ProductsService';
 export class AdmindashboardproductsComponent implements OnInit {
 
   sellers;
-  constructor(private AdminService: AdminService, private ProductsService: ProductsService) { }
+  constructor(private AdminService: AdminService, private ProductsService: ProductsService,private router:Router) { }
 
   ngOnInit() {
+
+    if(!localStorage.getItem('userdata')) {
+      this.router.navigate(['/Login']);
+    }
 
     this.all();
   }
@@ -25,10 +30,24 @@ export class AdmindashboardproductsComponent implements OnInit {
   }
   updatestatus(id) {
     console.log(id)
-    this.ProductsService.updatestatus(id, $('#' + id).val()).then(res => {
+    if($('#' + id).val()==="REJECTED") {
+      var comment = prompt("Enter Comment for Product")
+      if(comment!="") {
+        this.ProductsService.updatestatus(id, $('#' + id).val(),comment).then(res => {
       alert(res['data']);
       this.all();
     })
+      }
+      else {
+        alert("Comment is required");
+      }
+    } else {
+      this.ProductsService.updatestatus(id, $('#' + id).val(),"NA").then(res => {
+        alert(res['data']);
+        this.all();
+      })
+    }
+    
   }
 
   search() {
@@ -125,7 +144,7 @@ export class AdmindashboardproductsComponent implements OnInit {
       var tempcount = 0;
       $('.statusbox:checked').each(element => {
 
-        this.ProductsService.updatestatus(arr[element]['id'], "APPROVED").then(res => {
+        this.ProductsService.updatestatus(arr[element]['id'], "APPROVED","NA").then(res => {
           tempcount++;
           if (tempcount === arrcount) {
             alert("Updated");

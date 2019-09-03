@@ -9,6 +9,29 @@ import * as $ from "jquery";
 
 @Injectable()
 export class ProductsService {
+  addcategory(value: any) {
+    return new Promise((resolve,reject)=>{
+        axios.post(encodeURI(this.productsbaseurl+'addcategories?category='+value)).then(res=>{
+            resolve(res);
+        }).catch(res=>{
+            reject(res);
+        })
+    })
+  }
+//   updateproduct(arg0: any, value: any, value: any, value: any, value: any, value: any, value: any, value: any, value: any, Images: string, value: any, value: any) {
+//     throw new Error("Method not implemented.");
+//   }
+
+
+  updateproduct(pid,Name,long_Description,short_Description,seller_productCode,MRP,SSP,YMP,warranty,Images,dimension,category) {
+ return new Promise((resolve,reject)=>{
+      axios.post(encodeURI(this.productsbaseurl+'editproduct?YmartID='+pid+'&Name='+Name+'&longdes='+long_Description+'&shortdes='+short_Description+'&sellercode='+seller_productCode+'&MRP='+MRP+'&SSP='+SSP+'&YMP='+YMP+'&warranty='+warranty+'&MRP='+MRP+'&Images='+Images+'&Dimensions='+dimension+'&Category='+category)).then(res=>{
+          resolve(res);
+      }).catch(res=>{
+          reject(res);
+      })
+  })
+}
   getproductsbyid(id) {
     return new Promise((resolve,reject)=>{
         axios.get(this.productsbaseurl+'getproductsbyseller?SellerId='+id).then(res=>{
@@ -18,6 +41,17 @@ export class ProductsService {
         })
 
     })  }
+
+
+    getproductbyproductid(id) {
+        return new Promise((resolve,reject)=>{
+            axios.get(this.productsbaseurl+'getproduct?productid='+id).then(res=>{
+                resolve(res);
+            }).catch(res=>{
+                reject(res);
+            })
+    
+        })  }
   getcategories() {
     return new Promise((resolve,reject)=>{
         axios.get(this.productsbaseurl+'getcategories').then(res=>{
@@ -48,9 +82,9 @@ export class ProductsService {
         })
     })
   }
-  updatestatus(id: any, arg1: string | number | string[]) {
+  updatestatus(id: any, arg1: string | number | string[],comment) {
     return new Promise((resolve,reject)=>{
-        axios.post(this.productsbaseurl+'updatestatus?ID='+id+'&Value='+arg1).then(res=>{
+        axios.post(this.productsbaseurl+'updatestatus?ID='+id+'&Value='+arg1+'&comment='+comment).then(res=>{
             resolve(res);
         }).catch(res=>{
             reject(res);

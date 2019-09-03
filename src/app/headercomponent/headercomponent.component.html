@@ -25,7 +25,7 @@
         </li>
       
         
-        <li  *ngIf="!isAdmin||!isSeller" class="nav-item" style="float:right" >
+        <li  *ngIf="!isAdmin&&!isSeller" class="nav-item" style="float:right" >
             <a class="nav-link" routerLink="/Login" routerLinkActive="active">Login</a>
           </li>
 
@@ -33,10 +33,20 @@
               <a class="nav-link" routerLink="/admindashboard" routerLinkActive="active">Manage Sellers</a>
             </li>
 
+            <li *ngIf="isSeller"  class="nav-item" style="float:right" >
+                <a class="nav-link" routerLink="/sellerdashboard" routerLinkActive="active">Manage Products</a>
+              </li>
+
             <li *ngIf="isAdmin"  class="nav-item" style="float:right" >
                 <a class="nav-link" routerLink="/admindashboard/manageproducts" routerLinkActive="active">Manage Products</a>
               </li>
-  
+              <li *ngIf="isAdmin"  class="nav-item" style="float:right" >
+                  <a class="nav-link" routerLink="/admindashboard/managecategories" routerLinkActive="active">Manage Categories</a>
+                </li>
+
+              <li *ngIf="isAdmin||isSeller"  class="nav-item" style="float:right" >
+                  <a class="nav-link btn" (click)="redirecttohome() "  routerLinkActive="active">Logout</a>
+                </li>
 
 
       </ul>

@@ -19,7 +19,7 @@ export class SellerService {
     })  }
   
     sellersbaseurl= environment.url+"sellers/";
-    adminbaseurl = environment.baseurl;
+    adminbaseurl = environment.url+"admin/";
   constructor(private http: HttpClient) {
    }
 
@@ -35,6 +35,7 @@ export class SellerService {
         })
     } else {
         return new Promise((resolve,reject)=>{
+            
             axios.post(this.adminbaseurl+'login?Email='+email+'&Password='+password).then(res=>{
                 resolve(res);
             }).catch(res=>{

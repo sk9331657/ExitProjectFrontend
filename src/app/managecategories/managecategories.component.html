@@ -1,0 +1,68 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add New Category</h5>
+              <button type="button" id="closemodal" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <form [formGroup]="addproductForm" (ngSubmit)="onSubmit()">        
+                            <div class="form-group">
+                                <label for="Name">Name</label>
+                                <input type="text" formControlName="Name" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.Name.errors }" />
+                                <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Name.errors.required">Name is required</div>
+                                </div>
+                            </div>
+                           
+                            <div class="form-group"  style="text-align: center" >
+                                <button [disabled]="loading" class="btn btn-primary">Submit</button>
+                                <img *ngIf="loading" class="pl-3"
+                                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                            </div>
+                        </form>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+<div id="main-component" style="overflow: scroll">
+        <button type="button" id="loadmodal"  class="btn btn-success"  style="float:right;margin:5px;" data-toggle="modal" data-target="#exampleModal" >Add Product</button>
+        <table class="table table-bordered table-striped" id="table">
+                <thead>
+                    <tr>
+                        <th scope="col" (click)=sortTable(0)>ID <i class="fa fa-fw fa-sort"></i></th>
+
+                        <th scope="col">Name</th>
+                       
+                        <th scope="col">Options</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let seller of categories;let i = index">
+                            <td>
+                                    {{i}}
+                                </td>
+                            <td>
+                                    {{seller['Name']}}
+                                </td>
+                        
+                        
+                    
+                        <td>
+                            <button (click) = "load(seller['YmartId'])" class="btn btn-success" >
+                                Delete Category
+                            </button>
+                            
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+</div>
